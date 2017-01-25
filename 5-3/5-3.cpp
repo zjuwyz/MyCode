@@ -131,6 +131,7 @@ struct tree* inputTree() {
 			return node[i];
 		}
 	}
+	
 }
 
 int judge(struct tree *t1, struct tree *t2) {
