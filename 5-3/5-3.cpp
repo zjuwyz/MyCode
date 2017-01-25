@@ -97,15 +97,15 @@ int main() {
 
 struct tree* inputTree() {
 	int n;
-	struct tree *node[10];
+	struct tree *nodeList[10];
 	int isRoot[10];
 	scanf("%d\n", &n);
 	if (n == 0) {
 		return NULL;
 	}
 	for (int i = 0; i < n; i++) {
-		node[i] = (struct tree*)malloc(sizeof(struct tree));
-		node[i]->lson = node[i]->rson = NULL;
+		nodeList[i] = (struct tree*)malloc(sizeof(struct tree));
+		nodeList[i]->lson = nodeList[i]->rson = NULL;
 		isRoot[i] = 1;
 	}
 	for (int i = 0; i < n; i++) {
@@ -114,21 +114,21 @@ struct tree* inputTree() {
 
 		if (lsnum != '-') {
 			lsnum -= '0';
-			node[i]->lson = node[lsnum];
+			nodeList[i]->lson = nodeList[lsnum];
 			isRoot[lsnum] = 0;
 		}
 		if (rsnum != '-') {
 			rsnum -= '0';
-			node[i]->rson = node[rsnum];
+			nodeList[i]->rson = nodeList[rsnum];
 			isRoot[rsnum] = 0;
 		}
 
-		node[i]->data = letter;
+		nodeList[i]->data = letter;
 	}
 
 	for (int i = 0; i < n; i++) {
 		if (isRoot[i]) {
-			return node[i];
+			return nodeList[i];
 		}
 	}
 	
