@@ -28,14 +28,19 @@
 //
 //时空限制：400ms 64MB
 
-//思路：按照要求一步一步做呗，没什么算法。
+/*-----------------------------------------------------------------------------------------------------------------*/
 
+//思路：按照要求一步一步做呗，没什么算法。
+//时间复杂度：O(nlogn)
+//已AC， 用时13ms
 #include <stdio.h>
 #include <stdlib.h>
-struct tree {
+class tree {
+private:
 	int data;
 	tree* lson;
 	tree* rson;
+public:
 	void insert(int x);
 	void buildTree(int num);
 	tree(int x) :data(x), lson(NULL), rson(NULL) {};
@@ -44,6 +49,7 @@ struct tree {
 		if (rson) free(rson);
 		free(this);
 	}
+friend bool isEqualTree(tree *t1, tree *t2);
 };
 
 bool isEqualTree(tree *t1, tree *t2);
@@ -102,3 +108,7 @@ bool isEqualTree(tree *t1, tree *t2) {
 			return isEqualTree(t1->lson, t2->lson) && isEqualTree(t1->rson, t2->rson);
 	}
 }
+/*-----------------------------------------------------------------------------------------------------------------*/
+
+//后记：第一次尝试使用C++的特性来写东西，有很多不适应的地方，弄不清传指针好还是传值好，结构也很混乱。
+//改来改去终于改成了现在这样，至少能跑起来。
