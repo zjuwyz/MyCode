@@ -81,6 +81,8 @@ void tree::buildTree(int num) {
 		int temp;
 		scanf("%d", &temp);
 		insert(temp);
+		;
+		
 	}
 }
 
