@@ -29,21 +29,24 @@
 
 #include <stdio.h>
 #define SIZE 1001
-void build(int i, int* heap);
+void build(int i, int *heap);
 void output(int i, int *heap);
 
-int main() {
-	int heap[SIZE]; 
+int main()
+{
+	int heap[SIZE];
 
 	int n, m;
 	scanf("%d%d", &n, &m);
 
-	for (int i = 1; i <= n; i++) {
+	for (int i = 1; i <= n; i++)
+	{
 		scanf("%d", &heap[i]);
 		build(i, heap);
 	}
 
-	for (int i = 1; i <= m; i++) {
+	for (int i = 1; i <= m; i++)
+	{
 		int temp;
 		scanf("%d", &temp);
 		output(temp, heap);
@@ -51,26 +54,33 @@ int main() {
 	}
 
 	return 0;
-	
 }
 
-void swap(int* i, int* j) {
+void swap(int *i, int *j)
+{
 	int temp = *i;
 	*i = *j;
 	*j = temp;
 }
-int parent(int i) {
+
+int parent(int i)
+{
 	return i / 2;
 }
 
-void build(int i, int* heap) {
-	while (i != 1 && heap[parent(i)] > heap[i]) {
+void build(int i, int *heap)
+{
+	while (i != 1 && heap[parent(i)] > heap[i])
+	{
 		swap(&heap[parent(i)], &heap[i]);
 		i = parent(i);
 	}
 }
-void output(int i, int *heap) {
-	while (i) {
+
+void output(int i, int *heap)
+{
+	while (i)
+	{
 		printf("%d%s", heap[i], i != 1 ? " " : "");
 		i = parent(i);
 	}

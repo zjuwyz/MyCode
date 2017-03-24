@@ -71,7 +71,9 @@
 //ÒÑAC£¬ ºÄÊ±3ms
 #include <stdio.h>
 #include <stdlib.h>
-struct tree {
+
+struct tree
+{
 	char data;
 	struct tree *lson;
 	struct tree *rson;
@@ -80,44 +82,53 @@ struct tree {
 int judge(struct tree *t1, struct tree *t2);
 struct tree* inputTree();
 
-int main() {
+int main()
+{
 	struct tree *t1, *t2;
 	t1 = inputTree();
 	t2 = inputTree();
 
-	if (judge(t1, t2)) {
+	if (judge(t1, t2))
+	{
 		printf("Yes");
 	}
-	else {
+	else
+	{
 		printf("No");
 	}
 
 	return 0;
 }
 
-struct tree* inputTree() {
+struct tree* inputTree()
+{
 	int n;
 	struct tree *nodeList[10];
 	int isRoot[10];
 	scanf("%d\n", &n);
-	if (n == 0) {
+	if (n == 0)
+	{
 		return NULL;
 	}
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
+	{
 		nodeList[i] = (struct tree*)malloc(sizeof(struct tree));
 		nodeList[i]->lson = nodeList[i]->rson = NULL;
 		isRoot[i] = 1;
 	}
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
+	{
 		char letter, lsnum, rsnum;
 		scanf("%c %c %c\n", &letter, &lsnum, &rsnum);
 
-		if (lsnum != '-') {
+		if (lsnum != '-')
+		{
 			lsnum -= '0';
 			nodeList[i]->lson = nodeList[lsnum];
 			isRoot[lsnum] = 0;
 		}
-		if (rsnum != '-') {
+		if (rsnum != '-')
+		{
 			rsnum -= '0';
 			nodeList[i]->rson = nodeList[rsnum];
 			isRoot[rsnum] = 0;
@@ -126,76 +137,102 @@ struct tree* inputTree() {
 		nodeList[i]->data = letter;
 	}
 
-	for (int i = 0; i < n; i++) {
-		if (isRoot[i]) {
+	for (int i = 0; i < n; i++)
+	{
+		if (isRoot[i])
+		{
 			return nodeList[i];
 		}
 	}
-	
 }
 
-int judge(struct tree *t1, struct tree *t2) {
+int judge(struct tree *t1, struct tree *t2)
+{
 	int ret;
-	if (t1 == NULL) {
-		if (t2 == NULL) {
+	if (t1 == NULL)
+	{
+		if (t2 == NULL)
+		{
 			return 1;
 		}
 		else return 0;
 	}
 
-	if (t1->data != t2->data) {
+	if (t1->data != t2->data)
+	{
 		ret = 0;
 	}
-	else {
-		if (t1->lson == NULL && t1->rson == NULL) {
-			if (t2->lson == NULL && t2->rson == NULL) {
+	else
+	{
+		if (t1->lson == NULL && t1->rson == NULL)
+		{
+			if (t2->lson == NULL && t2->rson == NULL)
+			{
 				ret = 1;
 			}
-			else {
+			else
+			{
 				ret = 0;
 			}
 		}//no children nodes
-		if (t1->lson != NULL && t1->rson == NULL) {
-			if (t2->lson == NULL && t2->rson == NULL) {
+		if (t1->lson != NULL && t1->rson == NULL)
+		{
+			if (t2->lson == NULL && t2->rson == NULL)
+			{
 				ret = 0;
 			}
-			else if (t2->lson != NULL && t2->rson != NULL) {
+			else if (t2->lson != NULL && t2->rson != NULL)
+			{
 				ret = 0;
 			}
-			else {
-				if (t2->lson != NULL) {
+			else
+			{
+				if (t2->lson != NULL)
+				{
 					ret = judge(t1->lson, t2->lson);
 				}
-				else {
+				else
+				{
 					ret = judge(t1->lson, t2->rson);
 				}
 			}
 		}//a leftson
-		if (t1->lson == NULL && t1->rson != NULL) {
-			if (t2->lson == NULL && t2->rson == NULL) {
+		if (t1->lson == NULL && t1->rson != NULL)
+		{
+			if (t2->lson == NULL && t2->rson == NULL)
+			{
 				ret = 0;
 			}
-			else if (t2->lson != NULL && t2->rson != NULL) {
+			else if (t2->lson != NULL && t2->rson != NULL)
+			{
 				ret = 0;
 			}
-			else {
-				if (t2->lson != NULL) {
+			else
+			{
+				if (t2->lson != NULL)
+				{
 					ret = judge(t1->rson, t2->lson);
 				}
-				else {
+				else
+				{
 					ret = judge(t1->rson, t2->rson);
 				}
 			}
 		}// a rightson
-		if (t1->lson != NULL && t1->rson != NULL) {
-			if (t2->lson == NULL || t2->rson == NULL) {
+		if (t1->lson != NULL && t1->rson != NULL)
+		{
+			if (t2->lson == NULL || t2->rson == NULL)
+			{
 				ret = 0;
 			}
-			else {
-				if (judge(t1->lson, t2->rson) && judge(t1->rson, t2->lson)) {
+			else
+			{
+				if (judge(t1->lson, t2->rson) && judge(t1->rson, t2->lson))
+				{
 					ret = 1;
 				}
-				else if (judge(t1->lson, t2->lson) && judge(t1->rson, t2->rson)) {
+				else if (judge(t1->lson, t2->lson) && judge(t1->rson, t2->rson))
+				{
 					ret = 1;
 				}
 				else ret = 0;

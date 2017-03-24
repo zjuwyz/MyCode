@@ -54,15 +54,18 @@
 #define MAXE 33*MAXN
 #define MAX_DIST 6
 
-int main() {
-	int start[MAXN] = { 0 };
-	int t[2 * MAXE] = { 0 };
-	int next[2 * MAXE] = { 0 };
+int main()
+{
+	int start[MAXN] = {0};
+	int t[2 * MAXE] = {0};
+	int next[2 * MAXE] = {0};
 	int link = 0;
-	int N; int E;
+	int N;
+	int E;
 
 	scanf("%d%d", &N, &E);
-	for (int i = 1; i <= E; i++) {
+	for (int i = 1; i <= E; i++)
+	{
 		int n1, n2;
 		scanf("%d%d", &n1, &n2);
 		link++;
@@ -76,9 +79,10 @@ int main() {
 		start[n2] = link;
 	}
 
-	for (int s = 1; s <= N; s++) {
-		int queue[MAXN] = { 0 };
-		bool visited[MAXN] = { false };
+	for (int s = 1; s <= N; s++)
+	{
+		int queue[MAXN] = {0};
+		bool visited[MAXN] = {false};
 		int head = 0, tail = 0;
 		int count = 0;
 		queue[0] = s;
@@ -86,14 +90,18 @@ int main() {
 		visited[s] = true;
 		count++;
 
-		for (int dist = 1; dist <= MAX_DIST; dist++) {
+		for (int dist = 1; dist <= MAX_DIST; dist++)
+		{
 			int headPos = head;
-			for (; tail < headPos; tail++) {
+			for (; tail < headPos; tail++)
+			{
 				int nowNode = queue[tail];
 				int nowLinkNum = start[nowNode];
 				int nextNode = t[nowLinkNum];
-				while (nextNode) {
-					if (!visited[nextNode]) {
+				while (nextNode)
+				{
+					if (!visited[nextNode])
+					{
 						queue[head++] = nextNode;
 						visited[nextNode] = true;
 						count++;
@@ -105,9 +113,7 @@ int main() {
 		}
 
 		printf("%d: %.2lf%%\n", s, (100.0 * count) / N);
-
 	}
 
 	return 0;
-
 }

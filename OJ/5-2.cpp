@@ -27,57 +27,69 @@
 //“—AC£¨ ”√ ±17ms
 #include <stdio.h>
 #define MAX 2001
-int main() {
-	int c1[MAX] = { 0 }, c2[MAX] = { 0 };
-	int cans1[MAX] = { 0 }, cans2[MAX] = { 0 };
+
+int main()
+{
+	int c1[MAX] = {0}, c2[MAX] = {0};
+	int cans1[MAX] = {0}, cans2[MAX] = {0};
 	// cans1 for plus, c ans2 for product
 	int n1, n2;
 
 	scanf("%d", &n1);
-	for (int i = 0; i < n1; i++) {
+	for (int i = 0; i < n1; i++)
+	{
 		int exp, cons;
 		scanf("%d%d", &cons, &exp);
 		c1[exp] = cons;
 	}
 	scanf("%d", &n2);
-	for (int i = 0; i < n2; i++) {
+	for (int i = 0; i < n2; i++)
+	{
 		int exp, cons;
 		scanf("%d%d", &cons, &exp);
 		c2[exp] = cons;
 	}
 
-	for (int i = 0; i < MAX; i++) {
+	for (int i = 0; i < MAX; i++)
+	{
 		cans1[i] = c1[i] + c2[i];
 	}
-	for (int i = 0; i < MAX; i++) {
-		for (int j = 0; i + j <= MAX; j++) {
+	for (int i = 0; i < MAX; i++)
+	{
+		for (int j = 0; i + j <= MAX; j++)
+		{
 			cans2[i + j] += c1[i] * c2[j];
 		}
 	}
 	int printed = 0;
-	for (int i = MAX - 1; i >= 0; i--) {
-		if (cans2[i] != 0) {
+	for (int i = MAX - 1; i >= 0; i--)
+	{
+		if (cans2[i] != 0)
+		{
 			printf("%s%d %d", printed ? " " : "", cans2[i], i);
 			printed = 1;
 		}
 	}
-	if (!printed) {
+	if (!printed)
+	{
 		printf("0 0");
 	}
 
 	printf("\n");
 
 	printed = 0;
-	for (int i = MAX - 1; i >= 0; i--) {
-		if (cans1[i] != 0) {
+	for (int i = MAX - 1; i >= 0; i--)
+	{
+		if (cans1[i] != 0)
+		{
 			printf("%s%d %d", printed ? " " : "", cans1[i], i);
 			printed = 1;
 		}
 	}
-	if (!printed) {
+	if (!printed)
+	{
 		printf("0 0");
 	}
 
 	return 0;
-
 }

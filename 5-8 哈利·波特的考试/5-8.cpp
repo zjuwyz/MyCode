@@ -42,27 +42,35 @@
 
 //思路是显然的。每个动物是一个点，两个动物之间的魔咒长度是边的权值。只需要floyed做最短路就可以了。
 
-#include <stdio.h>	
+#include <stdio.h>
 #define MAXN 200
 #define INF 100000
-int main() {
-	int dist[MAXN][MAXN] = { 0 };
+
+int main()
+{
+	int dist[MAXN][MAXN] = {0};
 	int N, E;
 	scanf("%d%d", &N, &E);
-	for (int i = 1; i <= N; i++) {
-		for (int j = 1; j <= N; j++) {
+	for (int i = 1; i <= N; i++)
+	{
+		for (int j = 1; j <= N; j++)
+		{
 			if (i != j) dist[i][j] = INF;
 		}
 	}
-	for (int i = 1; i <= E; i++) {
+	for (int i = 1; i <= E; i++)
+	{
 		int s, t, d;
 		scanf("%d%d%d", &s, &t, &d);
 		dist[s][t] = dist[t][s] = d;
 	}
 
-	for (int mid = 1; mid <= N; mid++) {
-		for (int s = 1; s <= N; s++) {
-			for (int t = 1; t <= N; t++) {
+	for (int mid = 1; mid <= N; mid++)
+	{
+		for (int s = 1; s <= N; s++)
+		{
+			for (int t = 1; t <= N; t++)
+			{
 				dist[s][t] = (dist[s][t] > dist[s][mid] + dist[mid][t]) ? dist[s][mid] + dist[mid][t] : dist[s][t];
 			}
 		}
@@ -70,13 +78,16 @@ int main() {
 
 	int min_len = INF;
 	int min_N = 1;
-	for (int s = 1; s <= N; s++) {
+	for (int s = 1; s <= N; s++)
+	{
 		int max = 0;
-		for (int t = 1; t <= N; t++) {
+		for (int t = 1; t <= N; t++)
+		{
 			if (dist[s][t] > max)
 				max = dist[s][t];
 		}
-		if (max < min_len) {
+		if (max < min_len)
+		{
 			min_len = max;
 			min_N = s;
 		}
@@ -86,7 +97,6 @@ int main() {
 	else printf("%d %d", min_N, min_len);
 
 	return 0;
-
 }
 
 //后记：Floyed 算法的三层循环的顺序似乎很重要，不能改。

@@ -35,31 +35,38 @@
 //已AC， 用时13ms
 #include <stdio.h>
 #include <stdlib.h>
-class tree {
+
+class tree
+{
 private:
 	int data;
-	tree* lson;
-	tree* rson;
+	tree *lson;
+	tree *rson;
 public:
 	void insert(int x);
 	void buildTree(int num);
-	tree(int x) :data(x), lson(NULL), rson(NULL) {};
-	~tree() {
+	tree(int x) : data(x), lson(NULL), rson(NULL) {};
+
+	~tree()
+	{
 		if (lson) free(lson);
 		if (rson) free(rson);
 		free(this);
 	}
-friend bool isEqualTree(tree *t1, tree *t2);
+
+	friend bool isEqualTree(tree *t1, tree *t2);
 };
 
 bool isEqualTree(tree *t1, tree *t2);
 
-int main() {
+int main()
+{
 	int n, l;
-	tree* stdTree;
-	tree* chkTree;
+	tree *stdTree;
+	tree *chkTree;
 	//stdTr for the standard tree, chktr for the tree to be checked.
-	while (true) {
+	while (true)
+	{
 		scanf("%d", &n);
 		if (n == 0) return 0;
 		scanf("%d", &l);
@@ -67,7 +74,8 @@ int main() {
 		stdTree = new tree(0);
 		stdTree->buildTree(n);
 		bool isEqual = true;
-		for (int i = 0; i < l; i++) {
+		for (int i = 0; i < l; i++)
+		{
 			chkTree = new tree(0);
 			chkTree->buildTree(n);
 			printf("%s", isEqualTree(stdTree, chkTree) ? "Yes\n" : "No\n");
@@ -76,40 +84,47 @@ int main() {
 	return 0;
 }
 
-void tree::buildTree(int num) {
-	for (int i = 0; i < num; i++) {
+void tree::buildTree(int num)
+{
+	for (int i = 0; i < num; i++)
+	{
 		int temp;
 		scanf("%d", &temp);
-		insert(temp);
-		;
-		
+		insert(temp);;
 	}
 }
 
-void tree::insert(int x) {
-	if (data == 0) {
+void tree::insert(int x)
+{
+	if (data == 0)
+	{
 		data = x;
 		lson = new tree(0);
 		rson = new tree(0);
 	}
-	else {
-		if (x < data) {
+	else
+	{
+		if (x < data)
+		{
 			lson->insert(x);
 		}
 		else rson->insert(x);
 	}
 }
 
-bool isEqualTree(tree *t1, tree *t2) {
+bool isEqualTree(tree *t1, tree *t2)
+{
 	if (t1->data != t2->data)
 		return false;
-	else {
+	else
+	{
 		if (t1->data == 0)
 			return true;
-		else 
+		else
 			return isEqualTree(t1->lson, t2->lson) && isEqualTree(t1->rson, t2->rson);
 	}
 }
+
 /*-----------------------------------------------------------------------------------------------------------------*/
 
 //后记：第一次尝试使用C++的特性来写东西，有很多不适应的地方，弄不清传指针好还是传值好，结构也很混乱。
